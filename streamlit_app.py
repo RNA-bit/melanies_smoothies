@@ -1,6 +1,5 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
 # Write directly to the app
@@ -44,5 +43,7 @@ if ingredients_list:
     
         st.success('Your Smoothie is ordered, ' +  name_on_order + '!', icon="✅")
 
-
-
+#New section nutrition info
+import requests
+fruityvice_respose = requests.get ("https://fruityvice.com/api/fruit/")
+st.text(fruityvice_respose)
