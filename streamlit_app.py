@@ -54,11 +54,4 @@ try:
                 # Execute SQL insert statement
                 session.sql(my_insert_stmt).collect()
                 st.success('Your Smoothie is ordered, ' + name_on_order + '!', icon="✅")
-            except Exception as e:
-                st.error(f"Failed to submit order: {str(e)}")
-
-except Exception as ex:
-    st.error(f"An error occurred: {str(ex)}")
-
-# Display a link
-st.write("https://github.com/appuv")
+           
