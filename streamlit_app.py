@@ -59,6 +59,10 @@ if ingredients_list:
     
         st.success('Your Smoothie is ordered, ' +  name_on_order + '!', icon="✅")
 
-    else:
-        st.warning("Please choose at least one ingredient before submitting.")
+    except Exception as e:
+                st.error(f"Failed to submit order: {str(e)}")
+
+except Exception as ex:
+    st.error(f"An error occurred: {str(ex)}")
+
 
