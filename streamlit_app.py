@@ -1,3 +1,31 @@
+# Import python packages
+import streamlit as st
+from snowflake.snowpark.functions import col
+import requests
+
+# Write directly to the app
+st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
+st.write(
+    """Choose the fruits you want in your custom Smoothie!
+    """
+)
+
+name_on_order = st.text_input('Name on Smoothie:')
+st.write('The name on your Smoothies will be:', name_on_order)
+
+cnx = st.connection("snowflake")
+session = cnx.session()
+
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'), col('SEARCH_ON'))
+pd_df = my_dataframe.to_pandas()
+
+# ✅ Use only valid fruit names from the DataFrame
+ingredients_list = st.multiselect(
+    'Choose up to 5 ingredients:',
+    pd_df['FRUIT_NAME'].tolist(),
+    max_selections=5
+)
+
 if ingredients_list:
     ingredients_string = ' '
 
